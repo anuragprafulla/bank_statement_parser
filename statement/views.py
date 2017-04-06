@@ -6,8 +6,8 @@ from django.shortcuts import render
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from django.core import serializers
+from statement.data_extractor import extract
 
-# Create your views here.
 def index(request):
     return HttpResponse("Hello. We will help you manage your bank statements.")
 
@@ -34,8 +34,10 @@ def upload(request):
             fs = FileSystemStorage()
             filename = fs.save(myfile.name, myfile)
             uploaded_file_url = fs.url(filename)
+
+
             return render(request, 'upload_complete.html',{
-                'uploaded_file_url': uploaded_file_url
+                'uploaded_file_url': uploaded_file_url,
             })
     else:
         form = UploadFileForm()
@@ -58,3 +60,13 @@ def search(request):
 
          
     return render(request, 'search.html')
+
+def update_table(request):
+    #Returns the entire extracted data for a table
+    i = 1
+    d = extract("test.pdf") #Calls function extract() from statement.dataextractor
+    #"test.pdf" can be replaced with any file name
+    #ends
+
+    
+

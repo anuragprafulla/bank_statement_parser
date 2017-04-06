@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^upload$', views.upload, name='upload'),
     url(r'^list$', views.search, name='search'),
     url(r'^list', views.list, name='list'),
+    url(r'^update', views.update_table, name='update_table')
 ]
 
 if settings.DEBUG:
